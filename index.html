@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaleTap — Books, Reviews & Fun Facts</title>
+  <meta name="description" content="TaleTap: Explore genres, featured reads, and fun book facts. A simple beginner-friendly one-page site." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📚</text></svg>">
+  <style>
+    :root{
+      --bg: #0f172a;          /* slate-900 */
+      --panel: #111827;       /* gray-900 */
+      --panel-2: #1f2937;     /* gray-800 */
+      --text: #e5e7eb;        /* gray-200 */
+      --muted: #94a3b8;       /* slate-400 */
+      --brand: #a78bfa;       /* violet-300 */
+      --brand-2: #22d3ee;     /* cyan-400 */
+      --accent: #f59e0b;      /* amber-500 */
+      --ok: #34d399;          /* emerald-400 */
+      --danger: #fb7185;      /* rose-400 */
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --container: 1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+      color:var(--text); background: radial-gradient(1200px 600px at 80% -10%, rgba(167,139,250,.15), transparent 60%),
+                          radial-gradient(1000px 500px at 10% -20%, rgba(34,211,238,.12), transparent 60%),
+                          var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--container); margin-inline:auto; padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter: blur(8px);
+      background: rgba(15,23,42,.6); border-bottom:1px solid rgba(148,163,184,.1);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .brand .logo{width:36px; height:36px; display:grid; place-items:center; border-radius:12px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:var(--shadow)}
+    .brand span{letter-spacing:.3px}
+    .nav-links{display:flex; gap:18px}
+    .nav a{padding:8px 12px; border-radius:12px; color:var(--muted)}
+    .nav a:hover{color:var(--text); background:rgba(167,139,250,.12)}
+    .menu-btn{display:none}
+
+    /* Hero */
+    .hero{padding:80px 0 40px}
+    .hero .wrap{display:grid; gap:18px; grid-template-columns:1.2fr .8fr; align-items:center}
+    .eyebrow{color:var(--brand-2); font-weight:600; letter-spacing:.4px}
+    h1{font-size: clamp(32px, 5vw, 54px); margin:8px 0 10px}
+    .lead{color:var(--muted); font-size: clamp(16px, 2.2vw, 18px); line-height:1.7}
+    .cta{display:flex; gap:12px; margin-top:20px}
+    .btn{padding:12px 16px; border-radius:14px; font-weight:600; border:1px solid rgba(148,163,184,.2); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text)}
+    .btn:hover{transform: translateY(-1px); border-color: rgba(167,139,250,.6)}
+    .btn.primary{background:linear-gradient(135deg, var(--brand), var(--brand-2)); border:none}
+
+    .hero-card{background:linear-gradient(160deg, rgba(167,139,250,.15), rgba(34,211,238,.12)); border:1px solid rgba(148,163,184,.18); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+    .hero-card h3{margin:0 0 10px}
+    .badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#0c111b; background:#e6fffb; padding:6px 10px; border-radius:999px}
+
+    /* Sections */
+    section{padding:56px 0}
+    .section-title{font-size: clamp(22px, 3vw, 28px); margin:0 0 14px}
+    .section-lead{color:var(--muted); margin-top:0}
+
+    /* Genres grid */
+    .grid{display:grid; gap:16px}
+    .grid.genres{grid-template-columns: repeat(5, 1fr)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(148,163,184,.16); padding:16px; border-radius:16px; min-height:120px; display:flex; flex-direction:column; justify-content:space-between; transition: transform .15s ease, border-color .15s ease}
+    .card:hover{transform: translateY(-3px); border-color: rgba(167,139,250,.55)}
+    .chip{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; color:#0c111b; background:#fffbe6}
+
+    /* Featured */
+    .grid.featured{grid-template-columns: repeat(3, 1fr)}
+    .book{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(148,163,184,.16);
+      border-radius:16px; overflow:hidden; display:flex; flex-direction:column
+    }
+    .book .cover{aspect-ratio: 16/10; background: linear-gradient(135deg, rgba(167,139,250,.25), rgba(34,211,238,.25))}
+    .book .content{padding:14px}
+    .book h4{margin:0 0 6px}
+    .book p{margin:0; color:var(--muted)}
+
+    /* Facts */
+    .facts{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+    .fact{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(148,163,184,.16); padding:16px; border-radius:16px}
+    .fact strong{color:#e9d5ff}
+
+    /* Contact */
+    .panel{background:var(--panel); border:1px solid rgba(148,163,184,.16); border-radius:18px; padding:18px}
+    form{display:grid; gap:12px}
+    input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(148,163,184,.24); background:var(--panel-2); color:var(--text)}
+    input:focus, textarea:focus{outline:2px solid rgba(167,139,250,.6); border-color: transparent}
+    textarea{min-height:110px; resize:vertical}
+
+    footer{padding:30px 0; color:var(--muted); border-top:1px solid rgba(148,163,184,.12); margin-top:40px}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero .wrap{grid-template-columns:1fr}
+      .grid.genres{grid-template-columns: repeat(3, 1fr)}
+      .grid.featured{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; border:1px solid rgba(148,163,184,.2); background:rgba(255,255,255,.04)}
+      .grid.genres{grid-template-columns: repeat(2, 1fr)}
+      .grid.featured{grid-template-columns: 1fr}
+      .facts{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="TaleTap home">
+        <span class="logo">📚</span>
+        <span>TaleTap</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#genres">Genres</a>
+        <a href="#featured">Featured</a>
+        <a href="#facts">Facts</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-controls="mobileMenu" aria-expanded="false">☰ Menu</button>
+    </div>
+  </header>
+
+  <div id="home" class="hero">
+    <div class="container wrap">
+      <div>
+        <div class="eyebrow">Welcome to TaleTap</div>
+        <h1>Where stories come alive ✨</h1>
+        <p class="lead">Explore genres, browse featured reads, and pick up fun trivia about the books you love. This is a simple beginner-friendly site — perfect for showing your love for books and web basics.</p>
+        <div class="cta">
+          <a class="btn primary" href="#genres">Explore Genres</a>
+          <a class="btn" href="#featured">See Featured</a>
+        </div>
+      </div>
+      <div class="hero-card" role="note" aria-label="highlight">
+        <span class="badge">🚀 Beginner Project</span>
+        <h3>What’s inside?</h3>
+        <ul>
+          <li>Clean sections (Hero, Genres, Featured, Facts, Contact)</li>
+          <li>Responsive layout with subtle animations</li>
+          <li>Zero dependencies — just HTML/CSS/JS</li>
+        </ul>
+        <p style="color:var(--muted); margin:0">Edit the text and replace placeholder covers later with your favorites.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="genres">
+    <div class="container">
+      <h2 class="section-title">Explore Genres</h2>
+      <p class="section-lead">Pick a mood. We’ve got something for every reader.</p>
+      <div class="grid genres">
+        <a class="card" href="#featured" aria-label="Fiction">
+          <div class="chip">Fiction</div>
+          <strong>Emotional, character-driven tales.</strong>
+        </a>
+        <a class="card" href="#featured" aria-label="Mystery">
+          <div class="chip">Mystery</div>
+          <strong>Whodunits with sharp twists.</strong>
+        </a>
+        <a class="card" href="#featured" aria-label="Romance">
+          <div class="chip">Romance</div>
+          <strong>Slow burns & meet-cutes.</strong>
+        </a>
+        <a class="card" href="#featured" aria-label="Sci‑Fi">
+          <div class="chip">Sci‑Fi</div>
+          <strong>Futures, tech & galaxies.</strong>
+        </a>
+        <a class="card" href="#featured" aria-label="Non‑fiction">
+          <div class="chip">Non‑fiction</div>
+          <strong>Real stories. Big ideas.</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Reads</h2>
+      <p class="section-lead">A tiny shelf to get you started. Swap these with your own picks later.</p>
+      <div class="grid featured">
+        <article class="book">
+          <div class="cover" role="img" aria-label="Book cover placeholder"></div>
+          <div class="content">
+            <h4>A Man Called Ove</h4>
+            <p>Heartwarming tale of grumpiness, grief, and found family.</p>
+          </div>
+        </article>
+        <article class="book">
+          <div class="cover" role="img" aria-label="Book cover placeholder"></div>
+          <div class="content">
+            <h4>Postscript</h4>
+            <p>A tender sequel about love, loss, and moving forward.</p>
+          </div>
+        </article>
+        <article class="book">
+          <div class="cover" role="img" aria-label="Book cover placeholder"></div>
+          <div class="content">
+            <h4>Atomic Habits</h4>
+            <p>Small changes, big results — practical and inspiring.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="facts">
+    <div class="container">
+      <h2 class="section-title">Book Facts & Tiny Hacks</h2>
+      <p class="section-lead">Trivia to impress your reader friends 😉</p>
+      <div class="facts">
+        <div class="fact"><strong>📖 Fact:</strong> Many bestsellers were rejected multiple times before making it big.</div>
+        <div class="fact"><strong>✨ Hack:</strong> Not sure what to read? Try 25 pages — if it doesn’t click, drop it guilt‑free.</div>
+        <div class="fact"><strong>🧠 Fact:</strong> Reading 20 minutes a day = ~12 books a year.</div>
+        <div class="fact"><strong>📚 Hack:</strong> Keep a mini “to‑read” note in your phone to avoid decision fatigue.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Say Hello</h2>
+      <p class="section-lead">Have a book to suggest or want to share a review? Drop a note!</p>
+      <div class="panel">
+        <form id="contactForm">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" placeholder="Your message…"></textarea>
+          </label>
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+        <p style="color:var(--muted); margin-top:10px">(No backend yet — this demo just shows a success message.)</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About TaleTap</h2>
+      <p class="section-lead">A beginner‑friendly project made with love for stories and clean web basics. Edit this page to make it 100% yours.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> TaleTap • Built with HTML, CSS & a dash of JS</div>
+  </footer>
+
+  <script>
+    // Mobile menu (super simple)
+    const btn = document.getElementById('menuBtn');
+    const nav = document.querySelector('.nav-links');
+    btn?.addEventListener('click', () => {
+      const showing = getComputedStyle(nav).display !== 'none';
+      nav.style.display = showing ? 'none' : 'flex';
+      btn.setAttribute('aria-expanded', String(!showing));
+    });
+
+    // Contact form demo
+    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thanks! Your message was “sent” (demo). Replace this with a real form later.');
+      e.target.reset();
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
