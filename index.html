@@ -3,249 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TaleTap - Cozy Stories</title>
-  <style>
-    /* --- Pastel Pink/Peach Palette --- */
-    :root {
-      --bg: #FFF1F2;       /* Soft pastel pink */
-      --primary: #FFD1C1;  /* Light peach */
-      --secondary: #FFE4E1; /* Misty pink */
-      --accent: #FFB6B9;   /* Soft coral */
-      --text: #5A5A5A;     /* Soft grey */
-      --hover: #FFC1A6;    /* Slightly darker peach for hover */
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Poppins', Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-    }
-
-    /* --- Header --- */
-    header {
-      background-color: var(--primary);
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.8em;
-      cursor: default;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      margin-left: 25px;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    /* --- Hero Section --- */
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background-color: var(--secondary);
-      border-bottom-left-radius: 60px;
-      border-bottom-right-radius: 60px;
-      transition: background-color 0.5s ease;
-    }
-
-    .hero:hover {
-      background-color: #FFE0DE;
-    }
-
-    .hero h2 {
-      font-size: 2.2em;
-      margin-bottom: 25px;
-    }
-
-    .hero button {
-      padding: 14px 30px;
-      font-size: 1em;
-      border: none;
-      border-radius: 30px;
-      background-color: var(--accent);
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .hero button:hover {
-      background-color: var(--hover);
-      transform: scale(1.05);
-    }
-
-    /* --- Feature Section --- */
-    .features {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      padding: 60px 20px;
-      gap: 25px;
-    }
-
-    .card {
-      background-color: var(--primary);
-      padding: 25px;
-      border-radius: 20px;
-      flex: 1 1 250px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #FF6F61;
-    }
-
-    /* --- Popular Books Section --- */
-    .books {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .books h2 {
-      margin-bottom: 40px;
-      color: #FF6F61;
-    }
-
-    .book-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-    }
-
-    .book {
-      background-color: var(--secondary);
-      border-radius: 15px;
-      padding: 10px;
-      width: 160px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .book:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-    }
-
-    .book img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
-
-    .book p {
-      margin: 0;
-      font-weight: 500;
-      color: #555;
-    }
-
-    /* --- Footer --- */
-    footer {
-      background-color: var(--primary);
-      padding: 25px;
-      text-align: center;
-      font-size: 0.95em;
-      color: #333;
-      margin-top: 40px;
-    }
-
-    /* --- Responsive --- */
-    @media(max-width: 768px){
-      .features {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .book-grid {
-        gap: 15px;
-      }
-    }
-  </style>
+  <title>Publishing Company</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <!-- Header -->
   <header>
-    <h1>TaleTap 📖</h1>
+    <div class="logo">PUBLISHING <span>COMPANY</span></div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Reviews</a>
-      <a href="#">Summaries</a>
-      <a href="#">Suggestions</a>
-      <a href="#">Contact</a>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Coming Soon</a></li>
+        <li><a href="#">Top Seller</a></li>
+        <li><a href="#">Books</a></li>
+        <li><a href="#">Author</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     </nav>
+    <div class="search-box">
+      <input type="text" placeholder="Search">
+      <button>🔍</button>
+    </div>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
-    <h2>Discover stories that touch your heart 💛</h2>
-    <button onclick="alert('Explore books coming soon!')">Explore Now</button>
+    <div class="hero-text">
+      <h1>Good books don't give up all their secrets at once</h1>
+      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn primary">View All Books</a>
+        <a href="#" class="btn">Explore Now</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://i.ibb.co/pWgJtWD/book-girl.jpg" alt="Girl Reading">
+    </div>
   </section>
 
-  <!-- Feature Section -->
+  <!-- Features Section -->
   <section class="features">
-    <div class="card" onclick="alert('Latest reviews feature coming soon!')">
-      <h3>Latest Reviews</h3>
-      <p>See what readers are loving right now.</p>
+    <div class="feature">
+      <div class="icon">📚</div>
+      <h3>Children's Book</h3>
+      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
     </div>
-    <div class="card" onclick="alert('Top summaries feature coming soon!')">
-      <h3>Top Summaries</h3>
-      <p>Quick insights from your favorite books.</p>
+    <div class="feature">
+      <div class="icon">❤️</div>
+      <h3>Romance</h3>
+      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
     </div>
-    <div class="card" onclick="alert('Book suggestions feature coming soon!')">
-      <h3>Book Suggestions</h3>
-      <p>Find your next favorite read easily.</p>
+    <div class="feature">
+      <div class="icon">🏛️</div>
+      <h3>Art & Architecture</h3>
+      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
     </div>
-  </section>
-
-  <!-- Popular Books Section -->
-  <section class="books">
-    <h2>Popular Books</h2>
-    <div class="book-grid">
-      <div class="book">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg" alt="Book 1">
-        <p>The Alchemist</p>
-      </div>
-      <div class="book">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/41vNxn+F5+L._SX331_BO1,204,203,200_.jpg" alt="Book 2">
-        <p>To Kill a Mockingbird</p>
-      </div>
-      <div class="book">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/41Tz3U8uD6L._SX331_BO1,204,203,200_.jpg" alt="Book 3">
-        <p>1984</p>
-      </div>
-      <div class="book">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/51Z0nLAfLmL._SX329_BO1,204,203,200_.jpg" alt="Book 4">
-        <p>Pride & Prejudice</p>
-      </div>
+    <div class="feature">
+      <div class="icon">📖</div>
+      <h3>History</h3>
+      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    Made with ❤️ for books and its readers| TaleTap 2025
-  </footer>
-
+  <!-- Statistics Section -->
+  <section class="stats">
+    <div class="stat"><h2>75,678</h2><p>Active Readers</p></div>
+    <div class="stat"><h2>3,040</h2><p>Total Pages</p></div>
+    <div class="stat"><h2>283</h2><p>Cup of Coffee</p></div>
+    <div class="stat"><h2>14,500</h2><p>Facebook Fans</p></div>
+  </section>
 </body>
 </html>
